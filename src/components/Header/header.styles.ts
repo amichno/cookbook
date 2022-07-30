@@ -5,10 +5,14 @@ export const HeaderWraper = styled.div`
     height: 6rem;
     display: flex;
     align-items: center;
+    margin-left: 5%;
+    margin-right:5%;
 `
 
 export const ThemeSwitcher = styled.div`
     margin-left: auto;
     width:10rem;
     height: 2rem;
+    cursor: pointer;
+    margin-right: 5%;
 `

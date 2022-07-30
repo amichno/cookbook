@@ -1,6 +1,17 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
+export interface WraperProps{
+    theme:{
+        colors:{
+            font:string,
+            backGround:string,
+            boxBackGround:string,
+            shadow:string,
+          }
+    }
+}
+
+export const GlobalStyle = createGlobalStyle<WraperProps>`
     *{
         padding: 0;
         margin: 0;
@@ -8,7 +19,8 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body{
-        width:1440px;
+        width:100vw;
         height: 100%;
+        background-color: ${({theme})=>theme.colors.backGround};
     }
 `

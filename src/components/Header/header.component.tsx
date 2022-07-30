@@ -4,11 +4,16 @@ import { ReactComponent as CookBookLogo } from "../../assets/images/CookBook.svg
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon } from "@fortawesome/free-regular-svg-icons";
 
-const Header:React.FC = ()=>{
+
+export interface HeaderProps{
+    onClick: ()=>void;
+}
+
+const Header:React.FC<HeaderProps> = ({onClick})=>{
     return(
         <HeaderWraper>
-            <CookBookLogo />
-            <ThemeSwitcher>
+                 <CookBookLogo />
+            <ThemeSwitcher onClick={onClick}>
                 <FontAwesomeIcon icon={faMoon}/>
                 Dark mood
             </ThemeSwitcher>
