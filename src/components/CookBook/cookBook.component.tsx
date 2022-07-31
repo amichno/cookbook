@@ -6,6 +6,7 @@ import { Wraper } from './cookbook.styles';
 import { ThemeProvider } from 'styled-components';
 import Header from '../Header/header.component';
 import Section from '../Recipes/recipes.component';
+import AddRecipe from '../addRecipe/addRecipe.component';
 
 export interface Theme{
   colors:{
@@ -57,17 +58,20 @@ const CookBook: React.FC = ()=> {
             setTheme(themeDark)
         else
             setTheme(themeLight)
-    console.log(theme)
   }
 
-  const setModifyRecipe = (id:number) =>{
-    setModify(id);
+  const addRecipe = (name:string,ingredients:string[],description:string) =>{
+    const id = recipes.length;
+    const newRecipe = {id,name,ingredients,description};
+    setRecipes(prevState=> [...prevState,newRecipe]);
+    console.log(recipes)
   }
 
-  const DeleteRecipe = (id:number)=>{
-    setModify(id);
-    console.log(id);
-    console.log('ok');
+  const onClickDeleteRecipe = (event:React.MouseEvent<HTMLButtonElement>)=>{
+    let n=event.currentTarget.name;
+    let tab = recipes;
+    tab = tab.filter(item=>{if(item.name!==n){return(tab.splice((item.id),1))}});
+    setRecipes(tab)
   }
 
   return (
@@ -76,7 +80,8 @@ const CookBook: React.FC = ()=> {
             <GlobalStyle />
             <Wraper>
                 <Header onClick={ChangeTheme}/> 
-                <Section recipes={recipes} del={DeleteRecipe}/>
+                <Section recipes={recipes} del={onClickDeleteRecipe}/>
+                <AddRecipe add={addRecipe}/>
             </Wraper>
         </ThemeProvider>
      </>
