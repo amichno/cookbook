@@ -7,6 +7,7 @@ export const HeaderWraper = styled.div`
     align-items: center;
     margin-left: 5%;
     margin-right:5%;
+    margin-top: 0.5rem;
 `
 
 export const ThemeSwitcher = styled.div`
