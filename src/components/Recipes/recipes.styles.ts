@@ -47,3 +47,11 @@ export const Paragraph = styled.p<ParagraphProps>`
     margin-top: 0.5rem;
     font-size:  ${({isFirst})=>isFirst?"1.8rem":"1rem"};
 `
+
+export const Button = styled.button<WraperProps>`
+    border:none;
+    margin-right: 0.5rem;
+    background-color: ${({theme})=>theme.colors.backGround};
+    fill: ${({theme})=>theme.colors.font};
+    cursor: pointer;
+`

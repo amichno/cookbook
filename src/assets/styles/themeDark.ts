@@ -4,5 +4,6 @@ export const themeDark ={
         backGround:"hsl(207, 26%, 17%)",
         boxBackGround: "hsl(209, 23%, 22%)",
         shadow:"hsla(0, 0%, 82%, 0.2)",
+        addBoxColor: "hsl(209, 23%, 22%)"
     }
 }

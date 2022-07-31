@@ -1,7 +1,10 @@
 import { SectionWraper,
          Recipe,
-         Paragraph } from "./recipes.styles";
-import Tools from "../Tools/tools.components";
+         Paragraph,
+         Button} from "./recipes.styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan,  faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import AddRecipe from "../addRecipe/addRecipe.component";
 
 export interface SectionItem{
     id:number,
@@ -17,29 +20,33 @@ export interface SectionProps{
         ingredients: string[],
         description: string,
     }[],
-    del:(ide:number)=>void
+    del:(event:React.MouseEvent<HTMLButtonElement>)=>any;
+    mod?:(id:number)=>any
 }
 
-const Section:React.FC<SectionProps> = ({recipes, del})=>{
+const Section:React.FC<SectionProps> = ({recipes, del, mod}):JSX.Element=>{
     return(
         <SectionWraper>
                 {recipes.map(({id, name, ingredients, description}:SectionItem) =>{
                     return(<Recipe key={id}> 
                         <> 
                                 <Paragraph isFirst={true}>{name}</Paragraph>
-                                <Paragraph>{ingredients.map((key:string)=> {return (<p>{key}</p>)} )}</Paragraph>
+                                <Paragraph>{ingredients.map((key:string)=> {return (<span key={key}>{key}<br/></span>)} )}</Paragraph>
+                                
                                 <Paragraph>{description}</Paragraph>
                                 
-                     </>
-                            <Tools del={del} id={id}/>
+                         </>
+                               <Paragraph><Button onClick={del}  name={name}>
+                                <div><FontAwesomeIcon icon={faTrashCan} color={'orange'}/></div></Button>
+
+                                <Button name={name} >
+                                <FontAwesomeIcon icon={faPenToSquare} color={'orange'}/></Button></Paragraph>
+                              
                             </Recipe> 
                     )}
-
+                   
                 )}
-                
-                <Recipe>
-
-                </Recipe>
+              
         </SectionWraper>
     )
 }

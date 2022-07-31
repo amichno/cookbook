@@ -8,6 +8,7 @@ export const HeaderWraper = styled.div`
     margin-left: 5%;
     margin-right:5%;
     margin-top: 0.5rem;
+    flex-wrap: wrap;
 `
 
 export const ThemeSwitcher = styled.div`
