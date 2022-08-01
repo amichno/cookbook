@@ -14,6 +14,7 @@ export interface WraperProps{
 export interface ParagraphProps{
     isFirst?:boolean;
     isBig?:boolean;
+    isModifiable?:boolean;
 }
 
 export const SectionWraper = styled.div`
@@ -46,6 +47,7 @@ export const Paragraph = styled.p<ParagraphProps>`
     font-weight: ${({isFirst})=>isFirst?"600":"300"};
     margin-top: 0.5rem;
     font-size:  ${({isFirst})=>isFirst?"1.8rem":"1rem"};
+    border:${({isModifiable})=>isModifiable?"2px solid gray":"none"}
 `
 
 export const Button = styled.button<WraperProps>`

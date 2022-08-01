@@ -27,7 +27,7 @@ export interface Recipe{
 const CookBook: React.FC = ()=> {
 
   const [theme, setTheme] = useState<Theme>(themeLight);
-  const [modify, setModify] = useState<number>(-1);
+  const [modify, setModify] = useState<number>(0);
   const [recipes,setRecipes] =useState<Recipe[]>([{
                                                             id:1,
                                                             name:'One-Pot Enchilada Pasta',
@@ -67,10 +67,72 @@ const CookBook: React.FC = ()=> {
     console.log(recipes)
   }
 
+  const ereaseWhiteSpaces=(array:string[]) =>{
+        for(let i=0; i<array.length;i++)
+            if(array[i]==='') array.pop();
+  }
+
+  const UpdateIngredients = (name:string) =>{
+    let ingredient=document.getElementsByClassName(`Ingr ${name}`);
+    let newTabIngredients:string[]=[];
+    let listInString='';
+    for(let i =0;i<ingredient.length; i++)
+            {
+                let currentLine = ingredient[i].innerHTML;
+                listInString += currentLine;
+            }
+    newTabIngredients = listInString.split('<br>');
+    ereaseWhiteSpaces(newTabIngredients);
+    console.log(newTabIngredients);
+    const tab = recipes.filter(item=>{if(item.name===name) {item.ingredients = newTabIngredients}});
+  }
+
+  const updateNameRecipe = (name:string)=>{
+    let nameDiv=document.getElementById(`name ${name}`);
+    recipes.filter(item=>{if(item.name===name) {item.name = nameDiv?.innerHTML!}});
+  }
+
+  const updateDescription =(name:string)=>{
+    let description=document.getElementById(`descr ${name}`);
+    recipes.filter(item=>{if(item.name===name) {item.description = description?.innerHTML!}});
+  }
+
+  const updateRecipe = (event:React.MouseEvent<HTMLButtonElement>)=>{
+    let currentName = event.currentTarget.name;
+    let name=document.getElementById(`name ${currentName}`);
+    if(name?.innerHTML === null)
+        alert('Put value')
+    else
+        updateNameRecipe(currentName);
+    let ingredient=document.getElementsByClassName(`Ingr ${currentName}`);
+    if(ingredient[0].innerHTML===null)
+        alert ("Add some value")
+    else
+        UpdateIngredients(currentName);
+    let description=document.getElementById(`descr ${currentName}`);
+    if(description?.innerHTML === null)
+        alert('Put value')
+    else
+        updateDescription(currentName);
+    console.log(recipes);
+    setModify(0);
+  }
+
+  const getId=(name:String) =>{
+    let index = recipes.filter(item=>{if(item.name===name){return item.id}});
+    setModify(index[0].id);
+  }
+
+  const onClickEditRecipe = (event:React.MouseEvent<HTMLButtonElement>)=>{
+    let selcetedRecipe = event.currentTarget.name;
+    getId(selcetedRecipe);
+
+  }
+
   const onClickDeleteRecipe = (event:React.MouseEvent<HTMLButtonElement>)=>{
-    let n=event.currentTarget.name;
+    let selectedRecipe=event.currentTarget.name;
     let tab = recipes;
-    tab = tab.filter(item=>{if(item.name!==n){return(tab.splice((item.id),1))}});
+    tab = tab.filter(item=>{if(item.name!==selectedRecipe){return(tab.splice((item.id),1))}});
     setRecipes(tab)
   }
 
@@ -80,7 +142,11 @@ const CookBook: React.FC = ()=> {
             <GlobalStyle />
             <Wraper>
                 <Header onClick={ChangeTheme}/> 
-                <Section recipes={recipes} del={onClickDeleteRecipe}/>
+                <Section recipes={recipes} 
+                         del={onClickDeleteRecipe} 
+                         edit={onClickEditRecipe} 
+                         modify={modify}
+                         update={updateRecipe}/>
                 <AddRecipe add={addRecipe}/>
             </Wraper>
         </ThemeProvider>

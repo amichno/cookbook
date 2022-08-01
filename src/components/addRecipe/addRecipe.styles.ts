@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { WraperProps } from "../CookBook/cookbook.styles";
 
 export interface AddProps{
     isDescription?:boolean;
@@ -10,7 +9,6 @@ export const Icon = styled.div`
     width:2rem;
     height:2rem;
     align-content: end;
-    //padding: 0.5rem 0.5rem;
     position: absolute;
     top:0.5rem;
     left: 0.5rem

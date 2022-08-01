@@ -14,7 +14,7 @@ const Header:React.FC<HeaderProps> = ({onClick})=>{
         <HeaderWraper>
                  <CookBookLogo />
             <ThemeSwitcher onClick={onClick}>
-            <FontAwesomeIcon icon={faMoon} />
+            <FontAwesomeIcon icon={faMoon} aria-label="dark mode" />
                 Dark mood
             </ThemeSwitcher>
         </HeaderWraper>
