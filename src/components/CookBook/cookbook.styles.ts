@@ -17,5 +17,10 @@ export const Wraper = styled.div<WraperProps>`
     margin-left:auto;
     margin-right: auto;
     background-color: ${({theme})=>theme.colors.backGround};
-    color: ${({theme})=>theme.colors.font}
+    color: ${({theme})=>theme.colors.font};
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+
 `

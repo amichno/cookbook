@@ -43,9 +43,10 @@ const AddRecipe:React.FC<AddRecipeProps> = ({add}) =>{
 
         return(
             <AddRecipeWraper>
-                <Icon><FontAwesomeIcon icon={faPlus}/></Icon>
+               { /*<Icon><FontAwesomeIcon icon={faPlus} size={"1x"}/></Icon>*/}
+               
                 <Add>
-                    <form>
+                    <form  className="show">
                         <label>Name of the recipe</label>
                         <Input name="Name" isDescription ={false} placeholder="Name" onChange={onChangeName}></Input>
                         <label>Ingredients</label>
@@ -58,7 +59,7 @@ const AddRecipe:React.FC<AddRecipeProps> = ({add}) =>{
                                isDescription ={true} 
                                placeholder="Recipe description"
                                onChange={onChangeDescription}></Input>
-                        <Input isButton ={true} type="submit" onClick={onClickHandler}/>
+                        <Input isButton ={true} type="submit" onClick={onClickHandler} value ="Add recipe"/>
                     </form>
                 </Add>
 

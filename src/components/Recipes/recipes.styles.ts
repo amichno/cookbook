@@ -23,6 +23,7 @@ export const SectionWraper = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin-top: 2rem;
+    justify-content: center;
 `
 
 export const Recipe = styled.div<WraperProps>`
