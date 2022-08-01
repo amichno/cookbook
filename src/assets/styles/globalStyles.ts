@@ -23,6 +23,7 @@ export const GlobalStyle = createGlobalStyle<WraperProps>`
 
     body{
         width:100vw;
+        min-width: 375px;
         height: 100%;
         background-color: ${({theme})=>theme.colors.backGround};
     }

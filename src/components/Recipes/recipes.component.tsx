@@ -3,8 +3,7 @@ import { SectionWraper,
          Paragraph,
          Button} from "./recipes.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan,  faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import AddRecipe from "../addRecipe/addRecipe.component";
+import { faTrashCan,  faPenToSquare, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 
 export interface SectionItem{
     id:number,
@@ -21,26 +20,45 @@ export interface SectionProps{
         description: string,
     }[],
     del:(event:React.MouseEvent<HTMLButtonElement>)=>any;
-    mod?:(id:number)=>any
+    edit:(event:React.MouseEvent<HTMLButtonElement>)=>any;
+    modify?:number;
+    update:(event:React.MouseEvent<HTMLButtonElement>)=>any;
 }
 
-const Section:React.FC<SectionProps> = ({recipes, del, mod}):JSX.Element=>{
+const Section:React.FC<SectionProps> = ({recipes, del, modify, edit, update}):JSX.Element=>{
     return(
         <SectionWraper>
                 {recipes.map(({id, name, ingredients, description}:SectionItem) =>{
                     return(<Recipe key={id}> 
-                        <> 
-                                <Paragraph isFirst={true}>{name}</Paragraph>
-                                <Paragraph>{ingredients.map((key:string)=> {return (<span key={key}>{key}<br/></span>)} )}</Paragraph>
+                        
+                                <Paragraph id={`name ${name}`} 
+                                           isFirst={true} 
+                                           contentEditable={modify===id?true:false}
+                                           isModifiable={modify===id?true:false}>
+                                                                                    {name}
+                                </Paragraph>
+                                <Paragraph id={`ingredients ${name}`}
+                                           contentEditable={modify===id?true:false}
+                                           isModifiable={modify===id?true:false}>
+                                                                        {ingredients.map((key:string)=> 
+                                                                                 {return (<span className={`Ingr ${name}`} 
+                                                                                             key={key}>{key}<br/>
+                                                                                        </span>)} 
+                                                                        )}
+                                </Paragraph>
                                 
-                                <Paragraph>{description}</Paragraph>
+                                <Paragraph contentEditable={modify===id?true:false}
+                                            isModifiable={modify===id?true:false}
+                                            id={`descr ${name}`}>
+                                                                                    {description}
+                                </Paragraph>
                                 
-                         </>
+                         
                                <Paragraph><Button onClick={del}  name={name}>
                                 <div><FontAwesomeIcon icon={faTrashCan} color={'orange'}/></div></Button>
 
-                                <Button name={name} >
-                                <FontAwesomeIcon icon={faPenToSquare} color={'orange'}/></Button></Paragraph>
+                                <Button onClick={modify===id?update:edit} name={name} >
+                                <FontAwesomeIcon icon={modify===id?faFloppyDisk:faPenToSquare} color={'orange'}/></Button></Paragraph>
                               
                             </Recipe> 
                     )}
