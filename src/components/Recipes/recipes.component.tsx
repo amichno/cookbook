@@ -30,7 +30,7 @@ const Section:React.FC<SectionProps> = ({recipes, del, modify, edit, update}):JS
         <SectionWraper>
                 {recipes.map(({id, name, ingredients, description}:SectionItem) =>{
                     return(<Recipe key={id}> 
-                        
+                            
                                 <Paragraph id={`name ${name}`} 
                                            isFirst={true} 
                                            contentEditable={modify===id?true:false}
