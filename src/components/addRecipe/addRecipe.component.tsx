@@ -1,10 +1,9 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AddRecipeWraper,
         Add, 
         Input,
         Icon} from "./addRecipe.styles";
 import React, { useState } from "react";
+
 
 export interface Recipe{
     id:number,
@@ -44,16 +43,19 @@ const AddRecipe:React.FC<AddRecipeProps> = ({add}) =>{
         return(
             <AddRecipeWraper>
                { /*<Icon><FontAwesomeIcon icon={faPlus} size={"1x"}/></Icon>*/}
-               
+
                 <Add>
                     <form  className="show">
                         <label>Name of the recipe</label>
-                        <Input name="Name" isDescription ={false} placeholder="Name" onChange={onChangeName}></Input>
+                        <Input name="Name" isDescription ={false} placeholder="Name" onChange={onChangeName} required/>
+
+
+
                         <label>Ingredients</label>
                         <Input name="Ingredients" 
                                 isDescription ={false} 
                                 placeholder="Ingredients list (separated by comma)"
-                                onChange={onChangeIngredients}></Input>
+                                onChange={onChangeIngredients} required></Input>
                         <label>Description</label>
                         <Input name="Description" 
                                isDescription ={true} 
