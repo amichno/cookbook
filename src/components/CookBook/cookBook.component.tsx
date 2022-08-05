@@ -79,10 +79,8 @@ const CookBook: React.FC = ()=> {
   const validation = (name: string, ingredients:string[], description:string) =>{
     let minCharacters = 6;
     let maxCharacters = 300;
-    let characters = /[a-zA-Z0-9@#$%^&*]{10,}/;
     //if (RegExp(name)) 
-       // console.log("ok");
-        //if(string ==="")
+
   }
 
   const addRecipe = (name:string,ingredients:string[],description:string) =>{
@@ -93,8 +91,6 @@ const CookBook: React.FC = ()=> {
     const newTab = recipes;
     newTab.push(newRecipe);
     setRecipes(newTab);
-    //console.log('after');
-    //console.log(recipes)
   }
 
   const ereaseWhiteSpaces=(array:string[]) =>{
@@ -168,21 +164,15 @@ const CookBook: React.FC = ()=> {
 
   const onClickDeleteRecipe = (event:React.MouseEvent<HTMLButtonElement>)=>{
     let selectedRecipe=event.currentTarget.name;
-   // console.log(`selected ${selectedRecipe}`);
     let tab = recipes;
     let newTab = tab.filter(item=>{if(item.name==selectedRecipe){return item.id}});
     const index = newTab[0].id-1;
-    let wynikowa = tab.slice(0,index);
+    let result = tab.slice(0,index);
     let polowa = tab.slice(index+1,tab.length)
-    wynikowa.push(...polowa);
-    console.log(wynikowa);
-   // console.log(tab);
-    //tab = tab.filter(item=>{if(item.name!==selectedRecipe){ console.log(`id ${item.id}`); return(tab.splice((item.id),1))}});
-    tab = tab.splice(index,1);//ma byc slice
-    //console.log('delete');
-    console.log(tab);
-    setRecipes(wynikowa);
-    //console.log(recipes);
+    result.push(...polowa);
+    //console.log(wynikowa);
+    //console.log(tab);
+    setRecipes(result);
   }
 
   return (
